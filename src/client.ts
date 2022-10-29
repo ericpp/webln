@@ -12,6 +12,15 @@ export interface GetProviderParameters {
   pubkey?: string;
 }
 
+export function detectProvider(): boolean {
+    const webln: WebLNProvider = (window as any).webln;
+    if (!webln) {
+      return false;
+    }
+
+    return true;
+}
+
 export function requestProvider(_: GetProviderParameters = {}): Promise<WebLNProvider> {
   return new Promise((resolve, reject) => {
     if (typeof window === 'undefined') {
